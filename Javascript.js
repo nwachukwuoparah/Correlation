@@ -2408,3 +2408,93 @@ console.log(
 console.log(
   Math.round(average(SCRIPTS.filter((s) => !s.living).map((s) => s.year)))
 );
+
+//  DATA AND TIME ####################################################################################
+const getMonth = () => {
+  let currentDate = new Date(),
+    result = [],
+    arr = [
+      "JAN",
+      "FEB",
+      "MAR",
+      "APRIL",
+      "MAY",
+      "JUN",
+      "JUL",
+      "AUG",
+      "OCT",
+      "NOV",
+      "DEC",
+    ],
+    Month = currentDate.getMonth() - 1;
+  result.push(arr[Month]);
+  return result;
+};
+
+const getDaysOfWeek = () => {
+  let currentDate = new Date(),
+    result = [],
+    arr = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"],
+    day = currentDate.getDay() - 1,
+    currentDay = day;
+  result.push(arr[currentDay]);
+  return result;
+};
+
+class Age {
+  constructor(input) {
+    this.input = input;
+    this.currentDate = new Date();
+    this.Year = this.currentDate.getFullYear();
+    this.Date = this.currentDate.getDate();
+    this.Day = this.currentDate.getDay();
+    this.Hours = Math.floor(this.currentDate.getHours());
+    this.Minutes = this.currentDate.getMinutes();
+  }
+  speak() {
+    console.log(`You are ${this.Year - this.input} years old`);
+  }
+
+  Time(line) {
+    const zeroPad = (number) => {
+      let string = String(number);
+      string < 10 ? (string = "0" + string) : string;
+      return string;
+    };
+    this.Hours % 12 === 0
+      ? console.log(
+          `${zeroPad((this.Hours % 12) + 12)}:${zeroPad(this.Minutes)} ${line}`
+        )
+      : console.log(
+          `${zeroPad(this.Hours % 12)}:${zeroPad(this.Minutes)} ${line}`
+        );
+
+    console.log(`${getDaysOfWeek()}-${getMonth()}-${this.Year}`);
+    console.log(`${this.Date}-${zeroPad(this.Day)}-${this.Year}`);
+  }
+}
+let Get2 = new Age(Number(prompt("Year")));
+
+class Year extends Age {
+  speak() {
+    console.log(`You were born in ${this.Year - this.input}`);
+  }
+}
+
+let Get1 = new Year(Number(prompt("Age")));
+Get1.speak();
+Get2.speak();
+
+class Timer extends Age {
+  Run() {
+    if (this.Hours == 24 || this.Hours <= 11) {
+      Get1.Time("AM Good morning");
+    } else if (this.Hours === 12 && this.Hours <= 15) {
+      Get1.Time("PM Good Afternoon");
+    } else {
+      Get1.Time("PM Good Evening");
+    }
+  }
+}
+let runTimer = new Timer();
+runTimer.Run();
