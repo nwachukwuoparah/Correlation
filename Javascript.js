@@ -2408,25 +2408,25 @@ console.log(
 console.log(
   Math.round(average(SCRIPTS.filter((s) => !s.living).map((s) => s.year)))
 );
-
 //  DATA AND TIME ####################################################################################
 const getMonth = () => {
   let currentDate = new Date(),
     result = [],
     arr = [
-      "JAN",
-      "FEB",
-      "MAR",
-      "APRIL",
-      "MAY",
-      "JUN",
-      "JUL",
-      "AUG",
-      "OCT",
-      "NOV",
-      "DEC",
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
     ],
-    Month = currentDate.getMonth() - 1;
+    Month = currentDate.getMonth();
   result.push(arr[Month]);
   return result;
 };
@@ -2434,10 +2434,9 @@ const getMonth = () => {
 const getDaysOfWeek = () => {
   let currentDate = new Date(),
     result = [],
-    arr = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"],
-    day = currentDate.getDay() - 1,
-    currentDay = day;
-  result.push(arr[currentDay]);
+    arr = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    Day = currentDate.getDay() - 1;
+  result.push(arr[Day]);
   return result;
 };
 
@@ -2447,9 +2446,10 @@ class Age {
     this.currentDate = new Date();
     this.Year = this.currentDate.getFullYear();
     this.Date = this.currentDate.getDate();
-    this.Day = this.currentDate.getDay();
+    this.Month = this.currentDate.getMonth();
     this.Hours = Math.floor(this.currentDate.getHours());
     this.Minutes = this.currentDate.getMinutes();
+    this.Seconds = this.currentDate.getSeconds();
   }
   speak() {
     console.log(`You are ${this.Year - this.input} years old`);
@@ -2463,14 +2463,18 @@ class Age {
     };
     this.Hours % 12 === 0
       ? console.log(
-          `${zeroPad((this.Hours % 12) + 12)}:${zeroPad(this.Minutes)} ${line}`
+          `${zeroPad((this.Hours % 12) + 12)}:${zeroPad(
+            this.Minutes
+          )}:${zeroPad(this.Seconds)} ${line}`
         )
       : console.log(
-          `${zeroPad(this.Hours % 12)}:${zeroPad(this.Minutes)} ${line}`
+          `${zeroPad(this.Hours % 12)}:${zeroPad(this.Minutes)}.${zeroPad(
+            this.Seconds
+          )} ${line}`
         );
 
     console.log(`${getDaysOfWeek()}-${getMonth()}-${this.Year}`);
-    console.log(`${this.Date}-${zeroPad(this.Day)}-${this.Year}`);
+    console.log(`${this.currentDate.toLocaleDateString()}`);
   }
 }
 let Get2 = new Age(Number(prompt("Year")));
@@ -2488,11 +2492,11 @@ Get2.speak();
 class Timer extends Age {
   Run() {
     if (this.Hours == 24 || this.Hours <= 11) {
-      Get1.Time("AM Good morning");
+      Get1.Time("AM Good Morning");
     } else if (this.Hours === 12 && this.Hours <= 15) {
       Get1.Time("PM Good Afternoon");
     } else {
-      Get1.Time("PM Good Evening");
+      Get1.Time("PM Good Night");
     }
   }
 }
