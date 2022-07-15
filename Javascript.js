@@ -2452,7 +2452,9 @@ class Age {
     this.Seconds = this.currentDate.getSeconds();
   }
   speak() {
+    let years = this.Year - this.input;
     console.log(`You are ${this.Year - this.input} years old`);
+    console.log(`You were born in ${this.Year - years}`);
   }
 
   Time(line) {
@@ -2478,27 +2480,18 @@ class Age {
   }
 }
 let Get2 = new Age(Number(prompt("Year")));
-
-class Year extends Age {
-  speak() {
-    console.log(`You were born in ${this.Year - this.input}`);
-  }
-}
-
-let Get1 = new Year(Number(prompt("Age")));
-Get1.speak();
 Get2.speak();
-
 class Timer extends Age {
   Run() {
     if (this.Hours == 24 || this.Hours <= 11) {
-      Get1.Time("AM Good Morning");
+      Get2.Time("AM Good Morning");
     } else if (this.Hours === 12 && this.Hours <= 15) {
-      Get1.Time("PM Good Afternoon");
+      Get2.Time("PM Good Afternoon");
     } else {
-      Get1.Time("PM Good Night");
+      Get2.Time("PM Good Night");
     }
   }
 }
 let runTimer = new Timer();
 runTimer.Run();
+2222
