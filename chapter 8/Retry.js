@@ -1,28 +1,24 @@
-class MultiplicatorUnitFailure extends Error {}
 
-function primitiveMultiply(a, b) {
-    let N = Number(prompt("input"))
-  if (N < 5) {
-    return a * b;
+const primitiveMultiply = (b = 2) => {
+  let firstInput = Number(prompt("input"));
+
+  if (firstInput > -1) {
+    return firstInput * b;
   } else {
-    throw new MultiplicatorUnitFailure("Klunk");
+    throw new Error("Not a number");
   }
-}
+};
 
-function reliableMultiply(a, b) {
-  let result = 2;
-  for (;;) {
-    try {
-      result = primitiveMultiply(a, b);
-      break;
-    } catch (e) {
-      if (!(e instanceof MultiplicatorUnitFailure)) {
-        throw e;
-      }
+for (;;) {
+  try {
+    let result = primitiveMultiply();
+    console.log(result);
+    break;
+  } catch (e) {
+    if (e instanceof Error) {
+      console.log("Not a valid number. Try again.");
+    } else {
+      throw e;
     }
   }
-  return result;
 }
-
-console.log(reliableMultiply(8, 8));
-// → 64
