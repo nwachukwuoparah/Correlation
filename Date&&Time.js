@@ -60,7 +60,7 @@ class Age {
           )}:${zeroPad(this.Seconds)} ${line}`
         )
       : console.log(
-          `${zeroPad(this.Hours % 12)}:${zeroPad(this.Minutes)}.${zeroPad(
+          `${zeroPad(this.Hours % 12)}:${zeroPad(this.Minutes)}:${zeroPad(
             this.Seconds
           )} ${line}`
         );
@@ -75,8 +75,9 @@ class Timer extends Age {
   Run() {
     if (this.Hours == 24 || this.Hours <= 11) {
       Get2.Time("AM Good Morning");
-    } else if (this.Hours === 12 && this.Hours <= 15) {
+    } else if (this.Hours === 12 || this.Hours <= 15) {
       Get2.Time("PM Good Afternoon");
+    } else if (this.Hours > 15 && this.Hours < 20) {
     } else {
       Get2.Time("PM Good Night");
     }
