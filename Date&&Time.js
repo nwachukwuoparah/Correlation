@@ -71,17 +71,22 @@ class Age {
 }
 let Get2 = new Age(Number(prompt("Year")));
 Get2.speak();
+
 class Timer extends Age {
   Run() {
     if (this.Hours == 24 || this.Hours <= 11) {
       Get2.Time("AM Good Morning");
+      Get2.speak();
     } else if (this.Hours === 12 || this.Hours <= 15) {
       Get2.Time("PM Good Afternoon");
+      Get2.speak();
     } else if (this.Hours > 15 && this.Hours < 20) {
+      Get2.Time("PM Good Evening");
+      Get2.speak();
     } else {
       Get2.Time("PM Good Night");
+      Get2.speak();
     }
   }
 }
 let runTimer = new Timer();
-runTimer.Run();
